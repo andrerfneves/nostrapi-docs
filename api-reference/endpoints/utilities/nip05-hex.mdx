@@ -1,0 +1,66 @@
+---
+title: "NIP05 to HEX"
+api: "GET https://nostrapi.com/api/v1/utils/nip05-hex"
+description: "Convert NIP05 Nostr account identifiers to public key addresses in HEX format"
+---
+
+### Query
+
+<ParamField query="v" type="string" >
+  This is the NIP05 account identifier that you wish to convert (e.g. andre@zbd.gg, or user@nostr.io).
+</ParamField>
+
+### Response
+
+<ResponseField name="success" type="boolean">
+  Indicates whether the call was successful. `true` if successful, `false` if not.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Message detailing the results of the operation.
+</ResponseField>
+
+<ResponseField name="data" type="object">
+
+The contents of the data response object.
+
+<Expandable title="Toggle">
+
+<ResponseField name="pubkey" type="string">
+  This is the Nostr account's public key in HEX format.
+</ResponseField>
+
+<ResponseField name="relays" type="array">
+  If the Nostr account has `Home Relays` setup, these will appear inside this array.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request GET 'https://nostrapi.com/api/v1/utils/nip05-hex?v=andre@zbd.gg' \
+--header 'Content-Type: application/json' \
+--header 'apikey: <YOUR_KEY_HERE>'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Example Response
+{
+  "success": true,
+  "message": "Successfully fetched andre@zbd.gg NIP05 information.",
+  "data": {
+    "pubkey": "1b11ed41e815234599a52050a6a40c79bdd3bfa3d65e5d4a2c8d626698835d6d",
+    "relays": [
+      "wss://nostr.zbd.gg"
+    ]
+  }
+}
+```
+
+</ResponseExample>

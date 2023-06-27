@@ -1,0 +1,64 @@
+---
+title: "Twitter to Nostr"
+api: "GET https://nostrapi.com/api/v1/utils/twitter-nostr"
+description: "Get the Nostr public key of a Twitter user"
+---
+
+### Query
+
+<ParamField query="username" type="string" >
+  This is the Twitter username of the user you wish to find the Nostr account public key for.
+</ParamField>
+
+### Response
+
+<ResponseField name="success" type="boolean">
+  Indicates whether the call was successful. `true` if successful, `false` if not.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Message detailing the results of the operation.
+</ResponseField>
+
+<ResponseField name="data" type="object">
+
+The contents of the data response object.
+
+<Expandable title="Toggle">
+
+<ResponseField name="nostrPubkey" type="string">
+  This is the user's Nostr account public key.
+</ResponseField>
+
+<ResponseField name="twitterUsername" type="string">
+  This is the user's Twitter username.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request GET 'https://nostrapi.com/api/v1/utils/twitter-nostr?username=andreneves' \
+--header 'Content-Type: application/json' \
+--header 'apikey: <YOUR_KEY_HERE>'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Example Response
+{
+  "success": true,
+  "message": "Successfully fetched NOSTR public key for Twitter user @andreneves.",
+  "data": {
+    "nostrPubkey": "1b11ed41e815234599a52050a6a40c79bdd3bfa3d65e5d4a2c8d626698835d6d",
+    "twitterUsername": "andreneves"
+  }
+}
+```
+
+</ResponseExample>

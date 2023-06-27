@@ -1,0 +1,122 @@
+---
+title: "Relay Information"
+api: "POST https://nostrapi.com/api/v1/utils/relay-info"
+description: "Fetch public information about the provided Nostr relays"
+---
+
+### Body
+
+<ParamField body="relays" type="array" >
+  This is the current user group token you have for the user group that you want
+  to rotate.
+</ParamField>
+
+### Response
+
+<ResponseField name="success" type="boolean">
+  Indicates whether the call was successful. `true` if successful, `false` if not.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Message detailing the results of the operation.
+</ResponseField>
+
+<ResponseField name="data" type="object">
+
+The contents of the data response object.
+
+<Expandable title="Toggle">
+
+<ResponseField name="contact" type="string">
+  Email address for the operator of the relay.
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Description of the use of this relay.
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  The name of the given relay.
+</ResponseField>
+
+<ResponseField name="pubkey" type="string">
+  The Nostr public key of the relay.
+</ResponseField>
+
+<ResponseField name="software" type="string">
+  The specific Nostr implementation used by this relay.
+</ResponseField>
+
+<ResponseField name="supported_nips" type="array">
+  The individual NIPs supported by this relay.
+</ResponseField>
+
+<ResponseField name="version" type="string">
+  The specific version of the Nostr implementation used by this relay.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request POST 'https://nostrapi.com/api/v1/utils/relay-info' \
+--header 'Content-Type: application/json' \
+--header 'apikey: <YOUR_KEY_HERE>' \
+--data-raw '{
+  "relays": ["wss://nostr.zbd.gg", "wss://relay.damus.io"]
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "success": true,
+  "message": "Successfully fetched relay information.",
+  "data": [
+    {
+      "contact": "jb55@jb55.com",
+      "description": "Damus strfry relay",
+      "name": "damus.io ",
+      "pubkey": "32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245",
+      "software": "git+https://github.com/hoytech/strfry.git",
+      "supported_nips": [
+        1,
+        9,
+        11,
+        12,
+        15,
+        16,
+        20,
+        22
+      ],
+      "version": "v78-30b8c38"
+    },
+    {
+      "contact": "unset",
+      "description": "Notes and other stuff from ZEBEDEE users.",
+      "name": "ZBD Social",
+      "pubkey": "unset",
+      "software": "git+https://github.com/hoytech/strfry.git",
+      "supported_nips": [
+        1,
+        9,
+        11,
+        12,
+        15,
+        16,
+        20,
+        22
+      ],
+      "version": "v126-fbbfc3a"
+    }
+  ]
+}
+```
+
+</ResponseExample>

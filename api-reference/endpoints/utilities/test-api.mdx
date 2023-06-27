@@ -1,0 +1,36 @@
+---
+title: "Test API"
+api: "GET https://nostrapi.com/api/v1/utils/test-api"
+description: "Test API to check the validity of NOSTRAPI API keys"
+---
+
+### Response
+
+<ResponseField name="success" type="boolean">
+  Indicates whether the call was successful. `true` if successful, `false` if not.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Message detailing the results of the operation.
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request GET 'https://nostrapi.com/api/v1/utils/test-api' \
+--header 'Content-Type: application/json' \
+--header 'apikey: <YOUR_KEY_HERE>'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "success": true,
+  "message": "This is a valid API key!"
+}
+```
+
+</ResponseExample>

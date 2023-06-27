@@ -1,0 +1,59 @@
+---
+title: "NPUB to HEX"
+api: "GET https://nostrapi.com/api/v1/utils/npub-hex"
+description: "Convert NPUB public key addresses to HEX format"
+---
+
+### Query
+
+<ParamField query="v" type="string" >
+  This is the NPUB public key that you wish to convert.
+</ParamField>
+
+### Response
+
+<ResponseField name="success" type="boolean">
+  Indicates whether the call was successful. `true` if successful, `false` if not.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Message detailing the results of the operation.
+</ResponseField>
+
+<ResponseField name="data" type="object">
+
+The contents of the data response object.
+
+<Expandable title="Toggle">
+
+<ResponseField name="hex" type="string">
+  This is the converted public key in HEX format.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request GET 'https://nostrapi.com/api/v1/utils/npub-hex?v=npub1c7tk80ur5zeltm9czama0xdaxctyx298p2dv0kdwmv88z94568squh6xp4' \
+--header 'Content-Type: application/json' \
+--header 'apikey: <YOUR_KEY_HERE>'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Example Response
+{
+  "success": true,
+  "message": "Successfully fetched HEX value for npub1c7tk80ur5zeltm9czama0xdaxctyx298p2dv0kdwmv88z94568squh6xp4 pubkey.",
+  "data": {
+    "hex": "c79763bf83a0b3f5ecb81777d799bd36164328a70a9ac7d9aedb0e7116b4d1e0"
+  }
+}
+```
+
+</ResponseExample>

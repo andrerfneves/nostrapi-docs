@@ -1,22 +1,18 @@
 ---
 title: "Authentication"
-description: "Example overview page before API endpoints"
+description: "Using API keys to authenticate your requests to NOSTRAPI."
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et eros iaculis tortor dapibus cursus. Curabitur quis sapien nec tortor dictum gravida.
+To make use of the API endpoints in the NOSTRAPI suite, you will need to authenticate your requests. This is done by providing an API token in the `Authorization` header of your request.
 
 ```bash
-'Authorization': 'Token <team_token>'
+'apikey': 'nostr_XXXXXXXXXX'
 ```
 
-## API Tokens
+## API Keys
 
-Nullam convallis mauris at nunc consectetur, ac imperdiet leo rutrum. Maecenas cursus purus a pellentesque blandit. Pellentesque vitae lacinia libero, non mollis metus.
-
-Nam id ullamcorper urna, at rutrum enim. [Maecenas vulputate](/introduction) vehicula libero, vitae sodales augue pretium nec. Quisque a magna tempor, semper risus vel, fermentum nunc. Pellentesque fermentum interdum ex, eu convallis massa blandit sed. Aliquam bibendum ipsum vel laoreet auctor.
+Every `account` in the NOSTRAPI system has a unique API key. This key is used to authenticate your requests to the API. You can find your specific accounts' API key in the [NOSTRAPI dashboard](https://nostrapi.com/login).
 
 ### Permissions
 
-Etiam lobortis ut odio ut fermentum. Nunc odio velit, sollicitudin at consectetur id, tristique eget turpis. Aliquam at risus vitae dolor sodales venenatis. In hac habitasse platea dictumst.
-
-Aenean consequat diam eget mollis fermentum. [Quisque eu malesuada](/introduction) felis, non dignissim libero.
+API keys have `full admin` rights to that specific account. This means that you can create, update and delete any data in the account. Please be careful with your API key and do not share it with anyone.
