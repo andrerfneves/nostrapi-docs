@@ -1,58 +1,118 @@
 ---
 title: "Send Zap"
 api: "POST https://nostrapi.com/api/v1/zap"
-description: "This endpoint creates a new Nostr account"
+description: "Intantly send Bitcoin to any Nostr account"
 ---
 
 ### Body
 
-<ParamField body="current_token" type="string" >
-  This is the current user group token you have for the user group that you want
-  to rotate.
+
+<ParamField body="amount" type="number">
+  Total amount of Bitcoin (in satoshis) that you wish to send to the recipient.
 </ParamField>
 
-<ParamField body="current_token2" type="string" >
-  This is the current user group token you have for the user group that you want
-  to rotate.
+<ParamField body="pubkey" type="string">
+  The address of the recipient of the message -- can be a Nostr NIP05 address (e.g. andre@zbd.gg), or a Nostr public key in NPUB or HEX format.
+</ParamField>
+
+<ParamField body="relays" type="array" >
+  The array of relay URLs you wish to publish your zap to.
+</ParamField>
+
+<ParamField body="noteId" type="string" optional="true">
+  If you wish to Zap a specific post / note by a given user you can pass that note ID here. The note MUST BELONG to the recipient of the Zap.
+</ParamField>
+
+<ParamField body="message" type="string" optional="true">
+  If you wish to add a comment to the Zap transaction. This will be visible to the recipient/others.
+</ParamField>
+
+<ParamField body="when" type="number" optional="true">
+  If you want to schedule the post to be published at a later time, you can pass a UNIX timestamp number here. If you do not pass this parameter, the post will be broadcast immediately.
 </ParamField>
 
 ### Response
 
-<ResponseField name="success" type="number">
-  Indicates whether the call was successful. 1 if successful, 0 if not.
+<ResponseField name="success" type="boolean">
+  Indicates whether the call was successful. `true` if successful, `false` if not.
 </ResponseField>
 
-<ResponseField name="user_group" type="object">
-
-The contents of the user group
-
-<Expandable title="Toggle object">
-
-<ResponseField name="team_id" type="number">
-  This is the internal ID for this user group. You don't need to record this
-  information, since you will not need to use it.
+<ResponseField name="message" type="string">
+  Message detailing the results of the operation.
 </ResponseField>
 
-<ResponseField name="token" type="string">
-  This is the user group token (userGroupToken or USER_GROUP_TOKEN) that will be
-  used to identify which user group is viewing the dashboard. You should save
-  this on your end to use when rendering an embedded dashboard.
+<ResponseField name="data" type="object">
+
+The contents of the data response object.
+
+<Expandable title="Toggle">
+
+<ResponseField name="payment" type="object">
+
+Response information relating to the Bitcoin transaction (powered by ZEBEDEE API).
+
+<Expandable title="Toggle">
+
+<ResponseField name="zebedeeId" type="string">
+  The ID of the transaction recorded on your ZEBEDEE account.
 </ResponseField>
 
-<ResponseField name="name" type="string">
-  This is the name of the user group provided in the request body.
+<ResponseField name="fee" type="string">
+  The amount of Bitcoin paid out in fees for this transaction (in millisatoshis).
 </ResponseField>
 
-<ResponseField name="provided_id" type="string">
-  This is the user_group_id provided in the request body.
+<ResponseField name="unit" type="string">
+  The unit of the `amount` and `fee` property returned above.
 </ResponseField>
 
-<ResponseField name="api_environment_tag" type="JSON or null">
-  This is the environment tag of the user group. Possible values are 'Customer'
-  and 'Testing'. User group id's must be unique to each environment, so you can
-  not create multiple user groups with with same id. If you have a production
-  customer and a test user group with the same id, you will be required to label
-  one as 'Customer' and another as 'Testing'
+<ResponseField name="request" type="string">
+  The Bitcoin Lightning Network payment request from the recipient's address/wallet, which was paid behind the scenes.
+</ResponseField>
+
+<ResponseField name="processedAt" type="string">
+  The timestamp at which this Bitcoin Lightning Network transaction settled.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<ResponseField name="event" type="object">
+
+The contents of the actual Nostr event generated for this Zap (just for review purposes).
+
+<Expandable title="Toggle">
+
+<ResponseField name="kind" type="number">
+  The `kind` of this Nostr event.
+</ResponseField>
+
+<ResponseField name="created_at" type="number">
+  Timestamp of when this event was created/signed.
+</ResponseField>
+
+<ResponseField name="content" type="string">
+  Content message for the Zap.
+</ResponseField>
+
+<ResponseField name="tags" type="array">
+  Nostr-specific tags.
+</ResponseField>
+
+<ResponseField name="pubkey" type="string">
+  The Nostr public key of the sender of this Zap.
+</ResponseField>
+
+<ResponseField name="id" type="string">
+  The unique ID of this Nostr event.
+</ResponseField>
+
+<ResponseField name="sig" type="string">
+  The cryptographic signature of this Nostr event.
+</ResponseField>
+
+</Expandable>
+
 </ResponseField>
 
 </Expandable>
@@ -62,12 +122,17 @@ The contents of the user group
 <RequestExample>
 
 ```bash Example Request
-curl --location --request POST 'https://api.mintlify.com/api/user' \
+curl --location --request POST 'https://nostrapi.com/api/v1/zap' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Token <token>' \
+--header 'apikey: <YOUR_KEY_HERE>' \
 --data-raw '{
-    "current_token": "",
-    "current_token2": "",
+    "amount": 1,
+    "pubkey": "npub1akngghxzy6d75y8szp6y44u5pxktwy5aj6zh6jl3ncp8d93fj2fq5mfxa8",
+    "noteId": "note1j7eph95zj9lw53zjkth0ana2ntasuggxvnhhp6fyq9jnyzjxg2ts7q9m2n",
+    "message": "GM NOSTR FAM",
+    "relays": ["wss://nostr.zbd.gg", "wss://relay.damus.io"],
+    "when": 1685405495
+}
 }'
 ```
 
@@ -77,12 +142,44 @@ curl --location --request POST 'https://api.mintlify.com/api/user' \
 
 ```json Response
 {
-  "success": 1,
-  "user_group": {
-    "team_id": 3,
-    "token": "<user_group_token_to_auth_dashboard>",
-    "name": "Example 1",
-    "provided_id": "example_1"
+  "success": true,
+  "message": "Successfully zapped!",
+  "data": {
+    "payment": {
+      "zebedeeId": "3304660e-f52d-4048-a456-f9c7e1af67da",
+      "fee": "0",
+      "amount": "1000",
+      "unit": "msats",
+      "request": "lnbc10n1pjf4lwzpp5qpkssfysk65sx3gvayr4g564y7rk4p5ey22fu9zru0xujrp3k4xqhp5kdgg0wujgzhrm09ptk9pqzqel5k6tuhc6s6ntey2nsr667gslgeqcqzzsxqzfvsp5fqclc4dfrpfx3vmurxjtkxvw6e8jvrg33kd7ge0mc65zu4dltszs9qyyssq2vr0y3x9n05fvg9lnddcskx7e94mkg3pvugcxs7nxm0qeun2lka5ytgfaehwrvy2khryr98wxwhyyqp5yg5r9zeaxku6t2sjr06hkpsqw2ny3n",
+      "processedAt": "2023-06-27T15:18:27.246Z"
+    },
+    "event": {
+      "kind": 9734,
+      "created_at": 1687879106,
+      "content": "zap zap zap zap",
+      "tags": [
+        [
+          "p",
+          "eda6845cc2269bea10f010744ad79409acb7129d96857d4bf19e027696299292"
+        ],
+        [
+          "amount",
+          "1000"
+        ],
+        [
+          "relays",
+          "wss://nostr.mutinywallet.com",
+          "wss://relay.damus.io"
+        ],
+        [
+          "e",
+          "97b21b9682917eea4452b2eefecfaa9afb0e210664ef70e9240165320a464297"
+        ]
+      ],
+      "pubkey": "74b337b934ca7ffe01553e32e4fddb5aeca42a5209df663f7ff6e41e7bb133eb",
+      "id": "460db2bc6b1567a8c3d64726a654106cca316e295e581e5d38b51ef12f666779",
+      "sig": "7d3edae69c122da4c79e5341c97fdb0e15e2517f2126d50c9491f543debe005a44e46cbe74f84e8bd21e7e2d2fa34aa9d2889b49ec1ab998ce7f0efdf5854d46"
+    }
   }
 }
 ```

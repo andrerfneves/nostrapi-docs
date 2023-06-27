@@ -67,16 +67,25 @@
         "api-reference/endpoints/utilities/npub-hex",
         "api-reference/endpoints/utilities/nip05-hex",
         "api-reference/endpoints/utilities/nip19-hex",
-        "api-reference/endpoints/utilities/relay-info",
-        "api-reference/endpoints/utilities/twitter-nostr",
+        "api-reference/endpoints/utilities/relay-info"
+      ]
+    },
+    {
+      "group": "Experimental APIs",
+      "pages": [
+        "api-reference/endpoints/utilities/twitter-nostr"
+      ]
+    },
+    {
+      "group": "Healthcheck APIs",
+      "pages": [
         "api-reference/endpoints/utilities/test-api"
       ]
     }
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/zebedeeio",
-    "github": "https://github.com/zebedeeio",
-    "linkedin": "https://www.linkedin.com/company/zebedee"
+    "github": "https://github.com/zebedeeio"
   },
   "backgroundImage": "/background.png"
 }
