@@ -1,17 +1,12 @@
 ---
-title: "Account Stats"
-api: "GET https://nostrapi.com/api/v1/account/stats"
-description: "This endpoint creates a new Nostr account"
+title: "Create User"
+api: "POST https://api.mintlify.com/api/user"
+description: "This endpoint creates a new user"
 ---
 
 ### Body
 
-<ParamField body="current_token" type="string" >
-  This is the current user group token you have for the user group that you want
-  to rotate.
-</ParamField>
-
-<ParamField body="current_token2" type="string" >
+<ParamField body="current_token" type="string">
   This is the current user group token you have for the user group that you want
   to rotate.
 </ParamField>
@@ -61,13 +56,12 @@ The contents of the user group
 
 <RequestExample>
 
-```bash Example Request
+```bash cURL
 curl --location --request POST 'https://api.mintlify.com/api/user' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Token <token>' \
 --data-raw '{
-    "current_token": "",
-    "current_token2": "",
+    "current_token": ""
 }'
 ```
 
@@ -75,7 +69,7 @@ curl --location --request POST 'https://api.mintlify.com/api/user' \
 
 <ResponseExample>
 
-```json Response
+```json HTTP 200 - Success
 {
   "success": 1,
   "user_group": {

@@ -60,7 +60,7 @@ The contents of the data response object.
 
 <RequestExample>
 
-```bash Example Request
+```bash cURL
 curl --location --request POST 'https://nostrapi.com/api/v1/utils/relay-info' \
 --header 'Content-Type: application/json' \
 --header 'apikey: <YOUR_KEY_HERE>' \
@@ -73,7 +73,7 @@ curl --location --request POST 'https://nostrapi.com/api/v1/utils/relay-info' \
 
 <ResponseExample>
 
-```json Response
+```json HTTP 200 - Success
 {
   "success": true,
   "message": "Successfully fetched relay information.",

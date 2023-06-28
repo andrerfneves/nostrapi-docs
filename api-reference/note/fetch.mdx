@@ -1,0 +1,142 @@
+---
+title: "Fetch Note"
+api: "POST https://nostrapi.com/api/v1/account/info"
+description: "This endpoint creates a new Nostr account"
+---
+
+### Body
+
+<ParamField body="relays" type="array" >
+  The array of relay URLs you wish to publish your account update event to.
+</ParamField>
+
+<ParamField body="pubkey" type="string">
+  The address of the Nostr account -- can be a Nostr NIP05 address (e.g. andre@zbd.gg), or a Nostr public key in NPUB or HEX format.
+</ParamField>
+
+### Response
+
+<ResponseField name="success" type="boolean">
+  Indicates whether the call was successful. `true` if successful, `false` if not.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Message detailing the results of the operation.
+</ResponseField>
+
+<ResponseField name="data" type="object">
+
+The contents of the data response object.
+
+<Expandable title="Toggle">
+
+<ResponseField name="content" type="object">
+
+Metadata content for this Nostr account.
+
+<Expandable title="Toggle">
+
+<ParamField body="name" type="string" >
+  Public-facing name for this Nostr account.
+</ParamField>
+
+<ParamField body="about" type="string" >
+  Public-facing description / bio for this Nostr account.
+</ParamField>
+
+<ParamField body="picture" type="string" >
+  Public-facing URL for an account profile image (avatar).
+</ParamField>
+
+<ParamField body="picture" type="string" >
+  Public-facing URL for an account banner image.
+</ParamField>
+
+<ParamField body="website" type="string" >
+  Website URL for this account.
+</ParamField>
+
+<ParamField body="nip05" type="string" >
+  A verified NIP05 domain name that correctly points to this Nostr account's public key.
+</ParamField>
+
+<ParamField body="lud16" type="string" >
+  Lightning Address for this Nostr account such that it can receive Bitcoin payments.
+</ParamField>
+
+</Expandable>
+
+</ResponseField>
+
+<ResponseField name="kind" type="number">
+  The `kind` of this Nostr event. Kind 0 is `metadata` updates.
+</ResponseField>
+
+<ResponseField name="created_at" type="number">
+  Timestamp of when this account metadata was last updated.
+</ResponseField>
+
+<ResponseField name="tags" type="array">
+  Nostr-specific tags.
+</ResponseField>
+
+<ResponseField name="pubkey" type="string">
+  The Nostr public key of the Nostr account.
+</ResponseField>
+
+<ResponseField name="id" type="string">
+  The unique ID of this Nostr event updating account metadata.
+</ResponseField>
+
+<ResponseField name="sig" type="string">
+  The cryptographic signature of this Nostr update event.
+</ResponseField>
+
+
+</Expandable>
+
+</ResponseField>
+
+
+<RequestExample>
+
+```bash cURL
+curl --location --request POST 'https://nostrapi.com/api/v1/account/info' \
+--header 'Content-Type: application/json' \
+--header 'apikey: <YOUR_KEY_HERE>' \
+--data-raw '{
+  "relays": ["wss://nostr.zbd.gg", "wss://relay.damus.io"],
+  "pubkey": "andre@zbd.gg"
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json HTTP 200 - Success
+{
+  "success": true,
+  "message": "Successfully fetched 1b11ed41e815234599a52050a6a40c79bdd3bfa3d65e5d4a2c8d626698835d6d pubkey profile",
+  "data": {
+    "content": {
+      "name": "andre",
+      "about": "CTO & Co-Founder at ZEBEDEE | Download ZBD app to get started with Nostr + Bitcoin | Overlord at NBD | Partnerships at Vinteum",
+      "nip05": "andre@zbd.gg",
+      "lud16": "andre@zbd.gg",
+      "banner": "https://nostr.build/i/nostr.build_f2123a91e3c030224cf1cf5c0a70c0ed98e28ce1058350c2e3ca139c46436b6c.jpg",
+      "picture": "https://cdn.zebedee.io/uploads/f7b9201a-3dfe-44e6-af8d-d4e9d3d7a096_andre.png",
+      "website": "zbd.gg",
+      "display_name": "andre"
+    },
+    "created_at": 1687103365,
+    "id": "aef1ddc9b49b6ab5add091053f10b255e45f457870588af539a1d79e0c9bbebe",
+    "kind": 0,
+    "pubkey": "1b11ed41e815234599a52050a6a40c79bdd3bfa3d65e5d4a2c8d626698835d6d",
+    "sig": "74ffbe63e81d13bf613d2a005a2cca23a68b20d8506b8390d35cc3d559ef0e3af147f2eaf13623ef8311f97d12bb94e9a558d6b7821916a34113846a171fea31",
+    "tags": []
+  }
+}
+```
+
+</ResponseExample>

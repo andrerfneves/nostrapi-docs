@@ -1,0 +1,146 @@
+---
+title: "Account Stats"
+api: "GET https://nostrapi.com/api/v1/account/stats"
+description: "Get general network stats about this Nostr account including follower count and Zaps"
+---
+
+### Query
+
+<ParamField query="pubkey" type="string" optional="true">
+  The address of the Nostr account -- can be a Nostr NIP05 address (e.g. andre@zbd.gg), or a Nostr public key in NPUB or HEX format.
+</ParamField>
+
+### Response
+
+<ResponseField name="success" type="boolean">
+  Indicates whether the call was successful. `true` if successful, `false` if not.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Message detailing the results of the operation.
+</ResponseField>
+
+<ResponseField name="data" type="object">
+
+The contents of the data response object.
+
+<Expandable title="Toggle">
+
+<ResponseField name="pubkey" type="string">
+  The public key of the Nostr account in HEX format.
+</ResponseField>
+
+<ResponseField name="stats" type="object">
+
+General statistics about this Nostr account.
+
+<Expandable title="Toggle">
+
+<ResponseField name="followers" type="number">
+  Number of followers to this Nostr account.
+</ResponseField>
+
+<ResponseField name="following" type="number">
+  Number of other Nostr public keys this account is following.
+</ResponseField>
+
+<ResponseField name="postCount" type="number">
+  Total count of unique posts made by this Nostr account.
+</ResponseField>
+
+<ResponseField name="repostCount" type="number">
+  Total count of reposts made by this Nostr account.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<ResponseField name="zaps" type="object">
+
+General statistics about the Zapping activity around this Nostr account.
+
+<Expandable title="Toggle">
+
+<ResponseField name="totalMsatsSent" type="number">
+  Total amount of Bitcoin Zapped BY this account (in millisatoshis).
+</ResponseField>
+
+<ResponseField name="maxMsatsSent" type="number">
+  Maximum Bitcoin amount Zapped BY this account at one time (in millisatoshis).
+</ResponseField>
+
+<ResponseField name="minMsatsSent" type="number">
+  Minimum Bitcoin amount Zapped BY this account at one time (in millisatoshis).
+</ResponseField>
+
+<ResponseField name="totalMsatsReceived" type="number">
+  Total amount of Bitcoin Zapped TO this account (in millisatoshis).
+</ResponseField>
+
+<ResponseField name="totalCountReceived" type="number">
+  The number of Zaps this account has received.
+</ResponseField>
+
+<ResponseField name="maxMsatsReceived" type="number">
+  Maximum Bitcoin amount Zapped TO this account at one time (in millisatoshis).
+</ResponseField>
+
+<ResponseField name="minMsatsReceived" type="number">
+  Minimum Bitcoin amount Zapped TO this account at one time (in millisatoshis).
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash cURL
+curl --location --request GET 'https://nostrapi.com/api/v1/account/stats?pubkey=andre@zbd.gg' \
+--header 'Content-Type: application/json' \
+--header 'apikey: <YOUR_KEY_HERE>'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json HTTP 200 - Success
+{
+  "success": true,
+  "message": "Successfully fetched andre@zbd.gg pubkey profile stats",
+  "data": {
+    "pubkey": "1b11ed41e815234599a52050a6a40c79bdd3bfa3d65e5d4a2c8d626698835d6d",
+    "stats": {
+      "followers": 2,
+      "following": 325,
+      "postCount": 618,
+      "repostCount": 266
+    },
+    "zaps": {
+      "totalMsatsSent": 986859000,
+      "totalCountSent": 65,
+      "maxMsatsSent": 500000000,
+      "minMsatsSent": 100000,
+      "totalMsatsReceived": 182229000,
+      "totalCountReceived": 292,
+      "maxMsatsReceived": 50000000,
+      "minMsatsReceived": 10000
+    }
+  }
+}
+```
+
+```json HTTP 401 - Unauthorized
+{
+  "success": false,
+  "message": "You must pass a valid API key to use this endpoint."
+}
+```
+
+</ResponseExample>

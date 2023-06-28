@@ -30,7 +30,7 @@ description: "Post notes and events to any Nostr relay"
 
 <RequestExample>
 
-```bash Example Request
+```bash cURL
 curl --location --request POST 'https://nostrapi.com/api/v1/post' \
 --header 'Content-Type: application/json' \
 --header 'apikey: <YOUR_KEY_HERE>' \
@@ -45,7 +45,7 @@ curl --location --request POST 'https://nostrapi.com/api/v1/post' \
 
 <ResponseExample>
 
-```json Response
+```json HTTP 200 - Success
 {
   "success": true,
   "message": "Successfully published b4edd89a1c06c1aced80ed799090c418685939b3fe8778f8e76cc7ff1f2e36d7 event."

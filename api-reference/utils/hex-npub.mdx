@@ -1,13 +1,13 @@
 ---
-title: "NPUB to HEX"
-api: "GET https://nostrapi.com/api/v1/utils/npub-hex"
-description: "Convert NPUB public key addresses to HEX format"
+title: "HEX to NPUB"
+api: "GET https://nostrapi.com/api/v1/utils/hex-npub"
+description: "Convert a HEX public key address to an NPUB format"
 ---
 
 ### Query
 
 <ParamField query="v" type="string" >
-  This is the NPUB public key that you wish to convert.
+  This is the HEX public key that you wish to convert.
 </ParamField>
 
 ### Response
@@ -26,8 +26,8 @@ The contents of the data response object.
 
 <Expandable title="Toggle">
 
-<ResponseField name="hex" type="string">
-  This is the converted public key in HEX format.
+<ResponseField name="npub" type="string">
+  This is the converted public key in NPUB format.
 </ResponseField>
 
 </Expandable>
@@ -36,8 +36,8 @@ The contents of the data response object.
 
 <RequestExample>
 
-```bash Example Request
-curl --location --request GET 'https://nostrapi.com/api/v1/utils/npub-hex?v=npub1c7tk80ur5zeltm9czama0xdaxctyx298p2dv0kdwmv88z94568squh6xp4' \
+```bash cURL
+curl --location --request GET 'https://nostrapi.com/api/v1/utils/hex-npub?v=c79763bf83a0b3f5ecb81777d799bd36164328a70a9ac7d9aedb0e7116b4d1e0' \
 --header 'Content-Type: application/json' \
 --header 'apikey: <YOUR_KEY_HERE>'
 ```
@@ -49,9 +49,9 @@ curl --location --request GET 'https://nostrapi.com/api/v1/utils/npub-hex?v=npub
 ```json Example Response
 {
   "success": true,
-  "message": "Successfully fetched HEX value for npub1c7tk80ur5zeltm9czama0xdaxctyx298p2dv0kdwmv88z94568squh6xp4 pubkey.",
+  "message": "Successfully fetched NPUB for c79763bf83a0b3f5ecb81777d799bd36164328a70a9ac7d9aedb0e7116b4d1e0 key.",
   "data": {
-    "hex": "c79763bf83a0b3f5ecb81777d799bd36164328a70a9ac7d9aedb0e7116b4d1e0"
+    "npub": "npub1c7tk80ur5zeltm9czama0xdaxctyx298p2dv0kdwmv88z94568squh6xp4"
   }
 }
 ```

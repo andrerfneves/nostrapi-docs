@@ -121,7 +121,7 @@ The contents of the actual Nostr event generated for this Zap (just for review p
 
 <RequestExample>
 
-```bash Example Request
+```bash cURL
 curl --location --request POST 'https://nostrapi.com/api/v1/zap' \
 --header 'Content-Type: application/json' \
 --header 'apikey: <YOUR_KEY_HERE>' \
@@ -140,7 +140,7 @@ curl --location --request POST 'https://nostrapi.com/api/v1/zap' \
 
 <ResponseExample>
 
-```json Response
+```json HTTP 200 - Success
 {
   "success": true,
   "message": "Successfully zapped!",

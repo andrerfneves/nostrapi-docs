@@ -16,7 +16,7 @@ description: "Test API to check the validity of NOSTRAPI API keys"
 
 <RequestExample>
 
-```bash Example Request
+```bash cURL
 curl --location --request GET 'https://nostrapi.com/api/v1/utils/test-api' \
 --header 'Content-Type: application/json' \
 --header 'apikey: <YOUR_KEY_HERE>'
@@ -26,7 +26,7 @@ curl --location --request GET 'https://nostrapi.com/api/v1/utils/test-api' \
 
 <ResponseExample>
 
-```json Response
+```json HTTP 200 - Success
 {
   "success": true,
   "message": "This is a valid API key!"

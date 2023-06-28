@@ -45,41 +45,49 @@
     {
       "group": "Account APIs",
       "pages": [
-        "api-reference/endpoints/account/create",
-        "api-reference/endpoints/account/info",
-        "api-reference/endpoints/account/import",
-        "api-reference/endpoints/account/stats",
-        "api-reference/endpoints/account/update"
+        "api-reference/account/create",
+        "api-reference/account/update",
+        "api-reference/account/info",
+        "api-reference/account/stats"
       ]
     },
     {
       "group": "Action APIs",
       "pages": [
-        "api-reference/endpoints/actions/dm",
-        "api-reference/endpoints/actions/post",
-        "api-reference/endpoints/actions/zap"
+        "api-reference/actions/zap",
+        "api-reference/actions/post",
+        "api-reference/actions/dm"
+      ]
+    },
+    {
+      "group": "Note APIs",
+      "pages": [
+        "api-reference/note/fetch",
+        "api-reference/note/publish",
+        "api-reference/note/sign",
+        "api-reference/note/stats"
       ]
     },
     {
       "group": "Utility APIs",
       "pages": [
-        "api-reference/endpoints/utilities/hex-npub",
-        "api-reference/endpoints/utilities/npub-hex",
-        "api-reference/endpoints/utilities/nip05-hex",
-        "api-reference/endpoints/utilities/nip19-hex",
-        "api-reference/endpoints/utilities/relay-info"
+        "api-reference/utils/hex-npub",
+        "api-reference/utils/npub-hex",
+        "api-reference/utils/nip05-hex",
+        "api-reference/utils/nip19-hex",
+        "api-reference/utils/relay-info"
       ]
     },
     {
       "group": "Experimental APIs",
       "pages": [
-        "api-reference/endpoints/utilities/twitter-nostr"
+        "api-reference/utils/twitter-nostr"
       ]
     },
     {
       "group": "Healthcheck APIs",
       "pages": [
-        "api-reference/endpoints/utilities/test-api"
+        "api-reference/utils/test-api"
       ]
     }
   ],

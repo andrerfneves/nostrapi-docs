@@ -1,0 +1,118 @@
+---
+title: "Create Account"
+api: "POST https://nostrapi.com/api/v1/account/create"
+description: "Generate new Nostr accounts with public + private key pairs"
+---
+
+### Body
+
+<ParamField body="name" type="string" >
+  Given name of this Nostr account.
+</ParamField>
+
+### Response
+
+<ResponseField name="success" type="boolean">
+  Indicates whether the call was successful. `true` if successful, `false` if not.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Message detailing the results of the operation.
+</ResponseField>
+
+<ResponseField name="data" type="object">
+
+The contents of the data response object.
+
+<Expandable title="Toggle">
+
+<ResponseField name="id" type="string">
+  The NOSTRAPI ID of the newly created Nostr account.
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  The name of the account. Only visible to the user who created the account.
+</ResponseField>
+
+<ResponseField name="hex" type="object">
+
+Public and private key pair for the Nostr account in HEX.
+
+<Expandable title="Toggle">
+
+<ResponseField name="publicKey" type="string">
+  The public key for the Nostr account in HEX format.
+</ResponseField>
+
+<ResponseField name="privateKey" type="string">
+  The private key for the Nostr account in HEX format.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<ResponseField name="nip19" type="object">
+
+Public and private key pair for the Nostr account in NPUB/NSEC format.
+
+<Expandable title="Toggle">
+
+<ResponseField name="publicKey" type="string">
+  The public key for the Nostr account in NPUB format.
+</ResponseField>
+
+<ResponseField name="privateKey" type="string">
+  The private key for the Nostr account in NSEC format.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash cURL
+curl --location --request POST 'https://nostrapi.com/api/v1/account/create' \
+--header 'Content-Type: application/json' \
+--header 'apikey: <YOUR_KEY_HERE>' \
+--data-raw '{
+    "name": "My Test account!"
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json HTTP 200 - Success
+{
+  "success": true,
+  "message": "Successfully generated new public / private key pair.",
+  "data": {
+    "id": "7ae11a30-aa79-4f54-8628-48bd7c91a64b",
+    "name": "My Test account!",
+    "hex": {
+      "publicKey": "632182f5d63a9f142387af42b72298fe8789437d91d1ebb9d742f863a675aaef",
+      "privateKey": "c4969103f96e1a97e814b7002accb925e7e1871fa25328df741b47944349c4db"
+    },
+    "nip19": {
+      "publicKey": "npub1vvsc9awk8203ggu84aptwg5cljrcssmaj8g7hwwhgtux8fn44thsuq4dwe",
+      "privateKey": "nsec1cjtfzqledcvf06q5kuqz49n9eyhn7rpcl5ffj3hm5rdregs6fcndsv3sevs"
+    }
+  }
+}
+```
+
+```json HTTP 401 - Unauthorized
+{
+  "success": false,
+  "message": "You must pass a valid API key to use this endpoint."
+}
+```
+
+</ResponseExample>

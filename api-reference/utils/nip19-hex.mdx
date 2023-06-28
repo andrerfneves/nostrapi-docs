@@ -1,7 +1,7 @@
 ---
-title: "Account Info"
-api: "PATCH https://nostrapi.com/api/v1/account/info"
-description: "This endpoint creates a new Nostr account"
+title: "NIP19 to HEX"
+api: "GET https://nostrapi.com/api/v1/utils/nip19-hex"
+description: "This endpoint converts a NIP19 note ID address to a HEX format note ID"
 ---
 
 ### Body
@@ -61,7 +61,7 @@ The contents of the user group
 
 <RequestExample>
 
-```bash Example Request
+```bash cURL
 curl --location --request POST 'https://api.mintlify.com/api/user' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Token <token>' \
@@ -75,7 +75,7 @@ curl --location --request POST 'https://api.mintlify.com/api/user' \
 
 <ResponseExample>
 
-```json Response
+```json HTTP 200 - Success
 {
   "success": 1,
   "user_group": {

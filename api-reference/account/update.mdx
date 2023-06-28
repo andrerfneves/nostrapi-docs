@@ -1,0 +1,87 @@
+---
+title: "Update Metadata"
+api: "POST https://nostrapi.com/api/v1/account/update"
+description: "Update metadata information of a Nostr account"
+---
+
+### Body
+
+<ParamField body="name" type="string" >
+  Public-facing name for this Nostr account.
+</ParamField>
+
+<ParamField body="about" type="string" >
+  Public-facing description / bio for this Nostr account.
+</ParamField>
+
+<ParamField body="picture" type="string" >
+  Public-facing URL for an account profile image (avatar).
+</ParamField>
+
+<ParamField body="picture" type="string" >
+  Public-facing URL for an account banner image.
+</ParamField>
+
+<ParamField body="website" type="string" >
+  Website URL for this account.
+</ParamField>
+
+<ParamField body="nip05" type="string" >
+  A verified NIP05 domain name that correctly points to this Nostr account's public key.
+</ParamField>
+
+<ParamField body="lightning" type="string" >
+  Lightning Address for this Nostr account such that it can receive Bitcoin payments.
+</ParamField>
+
+<ParamField body="relays" type="array" >
+  The array of relay URLs you wish to publish your account update event to.
+</ParamField>
+
+### Response
+
+<ResponseField name="success" type="boolean">
+  Indicates whether the call was successful. `true` if successful, `false` if not.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Message detailing the results of the operation.
+</ResponseField>
+
+<RequestExample>
+
+```bash cURL
+curl --location --request POST 'https://nostrapi.com/api/v1/account/update' \
+--header 'Content-Type: application/json' \
+--header 'apikey: <YOUR_KEY_HERE>' \
+--data-raw '{
+  "relays": ["wss://nostr.zbd.gg", "wss://nostr.mutinywallet.com", "wss://relay.damus.io"],
+  "name": "Test Account Rocks!",
+  "about": "Oh yeah, this is a test account alright -- https://zbd.gg",
+  "picture": "https://cdn.zebedee.io/zbdgg/social/zbd-pfp-default.png",
+  "banner": "https://pbs.twimg.com/profile_banners/1443505072705576963/1686076926/1500x500",
+  "lightning": "zbd@zbd.gg",
+  "nip05": "zbd@zbd.gg",
+  "website": "https://zbd.gg"
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json HTTP 200 - Success
+{
+  "success": true,
+  "message": "Successfully published b4edd89a1c06c1aced80ed799090c418685939b3fe8778f8e76cc7ff1f2e36d7 event."
+}
+```
+
+```json HTTP 401 - Unauthorized
+{
+  "success": false,
+  "message": "You must pass a valid API key to use this endpoint."
+}
+```
+
+</ResponseExample>
