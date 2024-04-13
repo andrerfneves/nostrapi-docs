@@ -1,0 +1,60 @@
+---
+title: "Create Badge"
+api: "POST https://nostrapi.com/api/v1/badges"
+description: "Create a new Nostr Badge."
+---
+
+### Body
+
+<ParamField body="address" type="string" >
+  The address of the recipient of the message -- can be a Nostr NIP05 address (e.g. andre@zbd.gg), or a Nostr public key in NPUB or HEX format.
+</ParamField>
+
+<ParamField body="message" type="string" >
+  The message you wish to send to the recipient.
+</ParamField>
+
+<ParamField body="relays" type="array" >
+  The array of relay URLs you wish to publish your message to.
+</ParamField>
+
+<ParamField body="when" type="number" optional="true">
+  If you want to schedule the message to be sent at a later time, you can pass a UNIX timestamp number here. If you do not pass this parameter, the message will be sent immediately.
+</ParamField>
+
+### Response
+
+<ResponseField name="success" type="boolean">
+  Indicates whether the call was successful. `true` if successful, `false` if not.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Message detailing the results of the operation.
+</ResponseField>
+
+<RequestExample>
+
+```bash cURL
+curl --location --request POST 'https://nostrapi.com/api/v1/dm' \
+--header 'Content-Type: application/json' \
+--header 'apikey: <YOUR_KEY_HERE>' \
+--data-raw '{
+    "relays": ["wss://nostr.zbd.gg", "wss://relay.damus.io"],
+    "message": "this is super fun!",
+    "address": "andre@zbd.gg",
+    "when": 1685405495
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json HTTP 200 - Success
+{
+  "success": true,
+  "message": "Successfully published e52941ffa7f9ef4749b6e230dc379f95003d7ba4840627e7b4931ffc57fc83f7 event."
+}
+```
+
+</ResponseExample>

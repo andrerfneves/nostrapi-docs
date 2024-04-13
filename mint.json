@@ -1,9 +1,13 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "NOSTRAPI Docs",
+  "name": "NostrAPI Docs",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo.svg",
+    "light": "/logo.svg"
+  },
+  "modeToggle": {
+    "default": "light",
+    "isHidden": true
   },
   "favicon": "/favicon.png",
   "colors": {
@@ -11,89 +15,71 @@
     "light": "#81D7F7",
     "dark": "#004E7A"
   },
-  "topbarLinks": [
-    {
-      "name": "@nostrapi SDK",
-      "url": "https://mintlify.com/docs"
-    }
-  ],
   "topbarCtaButton": {
-    "name": "Login",
+    "name": "Open Dashboard",
     "url": "https://nostrapi.com/login"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
+      "pages": ["introduction", "authentication"]
     },
     {
-      "group": "Essentials",
-      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
-    },
-    {
-      "group": "General",
+      "group": "Badge APIs",
       "pages": [
-        "api-reference/authentication"
-      ]
-    },
-    {
-      "group": "Account APIs",
-      "pages": [
-        "api-reference/account/create",
-        "api-reference/account/update",
-        "api-reference/account/info",
-        "api-reference/account/stats"
+        "badges/create",
+        "badges/list",
+        "badges/award",
+        "badges/owners"
       ]
     },
     {
       "group": "Action APIs",
       "pages": [
-        "api-reference/actions/zap",
-        "api-reference/actions/post",
-        "api-reference/actions/dm"
+        "zap",
+        "post",
+        "dm"
+      ]
+    },
+    {
+      "group": "Account APIs",
+      "pages": [
+        "accounts/create",
+        "accounts/update",
+        "accounts/info",
+        "accounts/stats"
       ]
     },
     {
       "group": "Note APIs",
       "pages": [
-        "api-reference/note/fetch",
-        "api-reference/note/publish",
-        "api-reference/note/sign",
-        "api-reference/note/stats"
+        "notes/fetch",
+        "notes/publish",
+        "notes/sign",
+        "notes/stats"
       ]
     },
     {
       "group": "Utility APIs",
       "pages": [
-        "api-reference/utils/hex-npub",
-        "api-reference/utils/npub-hex",
-        "api-reference/utils/nip05-hex",
-        "api-reference/utils/nip19-hex",
-        "api-reference/utils/relay-info"
+        "utils/hex-npub",
+        "utils/npub-hex",
+        "utils/nip05-hex",
+        "utils/nip19-hex",
+        "utils/relay-info"
       ]
     },
     {
       "group": "Experimental APIs",
       "pages": [
-        "api-reference/utils/twitter-nostr"
+        "utils/twitter-nostr"
       ]
     },
     {
       "group": "Healthcheck APIs",
       "pages": [
-        "api-reference/utils/test-api"
+        "utils/test-api"
       ]
     }
-  ],
-  "footerSocials": {
-    "twitter": "https://twitter.com/zebedeeio",
-    "github": "https://github.com/zebedeeio"
-  },
-  "backgroundImage": "/background.png"
+  ]
 }
